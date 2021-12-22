@@ -9,7 +9,9 @@ function App() {
   const display = ()=>{
     return data.map(city=>{
       return (
-        <div key={city.name}>{city.name} {city.temp}</div>
+        <div className='resultsWeather' key={city.name}>{city.name} {city.temp}°C
+        <p>{city.icon}</p>
+        </div>
       )
     })
   }
@@ -17,12 +19,16 @@ function App() {
     if(!cityInput.current ||!cityInput.current.value ) return
     const cityName = cityInput.current.value;
     dispatch({type:"Change_Weather", name:cityName})
+    cityInput.current.value = ''
   }
   return (
     <div className="App">
-      <input ref={cityInput}></input>
-      <button onClick={()=>{searchCity()}}></button>
-    {display()}
+      <h1 className='pageTitle'>Weather App</h1>
+      <div>
+        <input autoFocus className='cityInput' ref={cityInput}></input>
+        <button onClick={()=>{searchCity()}}>Search</button>
+      </div>
+      {display()}
     </div>
   );
 }
